@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Churn Predictor</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        h1 {
+            color: #0d47a1;
+            margin-bottom: 25px;
+        }
+
+        .form-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #2196f3;
+            outline: none;
+            box-shadow: 0 0 5px #2196f3;
+        }
+
+        input[type="submit"] {
+            background-color: #0d47a1;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1976d2;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border: 1px solid #64b5f6;
+            border-radius: 8px;
+            color: #0d47a1;
+            font-weight: 600;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.03);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Churn Prediction</h1>
+        <form action="/predict" method="post" class="form-card">
+            <label>Gender:</label>
+            <select name="gender" required>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+
+            <label>Senior Citizen:</label>
+            <select name="senior" required>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <label>Has Partner:</label>
+            <select name="partner" required>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+
+            <label>Tenure (months):</label>
+            <input type="number" name="tenure" min="0" required>
+
+            <label>Monthly Charges ($):</label>
+            <input type="number" name="monthly" min="0" step="0.01" required>
+
+            <label>Total Charges ($):</label>
+            <input type="number" name="total" min="0" step="0.01" required>
+
+            <input type="submit" value="🚀 predict">
+        </form>
+
+        {% if result %}
+            <div class="result">{{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
